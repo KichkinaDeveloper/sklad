@@ -1,0 +1,8 @@
+table tr th{
+    font-weight:bold !important;
+     color:white !important;
+}
+table tr td{
+    color:black !important;
+    font-weight: bold !important;
+}
