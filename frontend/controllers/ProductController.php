@@ -24,14 +24,10 @@ class ProductController extends Controller{
     {
         
             $model = new Product();
-            $user = new User();
-            $user1 = (int)$user;
 
-            $model = $model->find()->where(['user_id' => Yii::$app->user->id]);
+            $model = $model->find()->where(['user_id' => Yii::$app->user->id])->one();
 
-            //  $all = "SELECT product.name,product.count,birlik.nomi FROM `product`
-            //   JOIN `kategory` on product.category_id = kategory.id
-            //   JOIN `birlik` on kategory.id = birlik.cat_id where product.user_id = $user1";    
+            $a = $model['user_id'];
 
             $query = new Query;
             $query->select([
@@ -44,12 +40,13 @@ class ProductController extends Controller{
         ->join('INNER JOIN', 'kategory',
             'product.category_id = kategory.id')		
         ->join('INNER JOIN', 'birlik', 
-            'kategory.id = birlik.cat_id')->where(["=", "product.user_id", "$user1"]); 
+            'kategory.id = birlik.cat_id')->where(["=", "product.user_id", "$a"]); 
 		
+            $countQuery = clone $query;
             
             $pagination = new Pagination ([
-                'defaultPageSize' => 6,
-                'totalCount' => $query
+                'defaultPageSize' => 5,
+                'totalCount' => $countQuery->count()
                 ]);
                 
                 $query->limit($pagination->limit);
@@ -67,16 +64,23 @@ class ProductController extends Controller{
             
             public function actionDecrease(){
                 
-                $sql="SELECT * FROM `product` WHERE count / maximal < 1/2";
+                $model = new Product();
+                $user = new User();
+                $user = (int)$user;
+                $model = $model->find()->where(['user_id' => Yii::$app->user->id])->one();
+
+                $a = $model['user_id'];
+
+                $sql="SELECT * FROM `product` WHERE (count / maximal < 1/2 and product.user_id = $a)";
                 $query = Product::findBySql($sql);
                 
                 $pagination = new Pagination ([
-                'defaultPageSize' => 6,
-                'totalCount' => $query->count()
-            ]);
-            
-            $query->limit($pagination->limit);
-            $query->offset($pagination->offset);
+                    'defaultPageSize' => 6,
+                    'totalCount' => $query->count()
+                    ]);
+                    
+                    $query->limit($pagination->limit);
+                    $query->offset($pagination->offset);
             
             return $this->render('decrease', [
                 'query' => $query->all(),

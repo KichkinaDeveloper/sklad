@@ -1,19 +1,16 @@
 <?php 
 use yii\helpers\Url;
 use yii\widgets\LinkPager;
-use common\models\Product;
-use common\models\Birlik;
-
 ?>
 
 <?php if(!\Yii::$app->user->isGuest):?>
-<a href="<?=Url::to(['/product/send'])?>" class="btn btn-primary mt-4" style="margin-left:0px; margin-bottom:15px">Sotish
+<a href="<?=Url::to(['/product/send'])?>" class="btn btn-primary mt-4" style="margin-left:0px; margin-bottom:15px">Mahsulotni sotish
 </a>
-<a href="<?=Url::to(['/product/export'])?>" class="btn btn-success mt-4" style="margin-left:0px; margin-bottom:15px">Excel
+<a href="<?=Url::to(['/product/export'])?>" class="btn btn-success mt-4" style="margin-left:0px; margin-bottom:15px">Excel export
 </a>
-<a href="<?=Url::to(['/product/decrease'])?>" class="btn btn-danger mt-4" style="margin-left:0px; margin-bottom:15px">Kamaygan
+<a href="<?=Url::to(['/product/decrease'])?>" class="btn btn-danger mt-4" style="margin-left:0px; margin-bottom:15px">Kamaygan mahsulotlar
 </a>
-<a href="<?=Url::to(['/product/add'])?>" class="btn btn-info mt-4" style="margin-left:0px; margin-bottom:15px">Qo'shish
+<a href="<?=Url::to(['/product/add'])?>" class="btn btn-info mt-4" style="margin-left:0px; margin-bottom:15px">Mahsulot qo'shish
 </a>
 <?php elseif(\Yii::$app->user->isGuest):?>
 <h2 class="text-center mt-3 font-weight-bold">Iltimos siz Avval ro'yhatdan o'ting!</h2>
@@ -50,7 +47,7 @@ use common\models\Birlik;
     <?php endforeach;?>
   </tbody>
 </table>
-<div style="margin-left:480px">
+<div style="margin-left:480px; text-align:center">
 <?=LinkPager::widget([
     'pagination' => $pagination,
     'pageCssClass' => "page-item",

@@ -6,3 +6,31 @@ table tr td{
     color:black !important;
     font-weight: bold !important;
 }
+.pagination .page-item.active .page-link {
+    -webkit-transition: all .2s linear;
+    transition: all .2s linear;
+    border-radius: .125rem;
+    background-color: blue;
+    color: #fff;
+    padding-left:15px;
+    padding-right:15px;
+    font-weight: bold;
+}
+li.page-item{
+  padding:0;
+}
+.page-link:not(:disabled):not(.disabled) {
+    cursor: pointer;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: -13px;
+    font-weight: bold;
+}
+a.page-link{
+  padding:8px;
+  margin:0px;
+  font-size:14.4px;
+  padding-left:15px;
+  padding-right:15px;
+  font-weight: bold;
+}
